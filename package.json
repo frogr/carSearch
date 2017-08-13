@@ -1,0 +1,17 @@
+{
+  "name": "carsearch",
+  "version": "1.0.0",
+  "description": "A script that searches Craigslist and ebay",
+  "main": "script.js",
+  "dependencies": {
+    "ebay-api": "^1.13.7",
+    "node-craigslist": "^1.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "No test",
+    "start": "node script.js"
+  },
+  "author": "Los",
+  "license": "ISC"
+}

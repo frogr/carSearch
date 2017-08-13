@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Car Search</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<script src="assets/JS/gs_sortable.js"></script>
+	<style>
+	#Sorting { display: none; position: absolute; top: 0; left: 0; }
+	form { margin: 0 auto; max-width: 440px; text-align: center; }
+		form input { margin-bottom: 4px; }
+	.Error { display: none; margin-bottom: 4px; padding: 10px; border: 1px solid red; color: red; background: pink; }
+	/* Sortable tables */
+	table.sortable { margin: 40px auto; }
+		table.sortable thead { font-weight: bold; color: #666666; background-color: #CCCCCC; cursor: default; }
+				table.sortable thead th,
+				table.sortable tbody td { padding: 4px; }
+			table.sortable tbody tr:nth-child(even) { background-color: #EEEEEE; }
+	</style>
+</head>
+
+<body>
+
+<div id="Sorting">Sorting</div>
+
+<form action="" method="get" name="Search">
+	<fieldset>
+		<legend>Search</legend>
+		<div id="Error" class="Error">&nbsp;</div>
+		<input type="text" name="postal" placeholder="Zip Code">
+		<input type="number" name="search_distance" placeholder="Miles From Zip Code">
+		<input type="text" name="keyword" placeholder="Keywords">
+	</fieldset>
+	<div class="Actions">
+		<input type="button" name="Submit" value="Search" style="margin-top: 10px">
+	</div>
+</form>
+<script>
+	var RequiredIf = {
+	    init: function ()
+		{
+            RequiredIf.TheForm = document.forms['Search'];
+            RequiredIf.Postal = RequiredIf.TheForm.postal;
+            RequiredIf.MaxDistance = RequiredIf.TheForm.search_distance;
+            RequiredIf.Error = document.getElementById('Error');
+            RequiredIf.Valid = true;
+
+            RequiredIf.TheForm.Submit.addEventListener('click', function (e) { RequiredIf.CheckTheFields(); })
+		},
+	    CheckTheFields: function ()
+		{
+            if (RequiredIf.Postal.value != '') { RequiredIf.MaxDistanceRequired(); }
+            if (RequiredIf.MaxDistance.value != '') { RequiredIf.ZipRequired(); }
+            if (RequiredIf.Valid) { RequiredIf.TheForm.submit(); }
+            RequiredIf.Valid = true;
+        },
+		ZipRequired: function ()
+		{
+			if (RequiredIf.Postal.value == '')
+			{
+			    var Message = 'Zip Code is required if Miles From Zip Code is filled in.';
+			    RequiredIf.ShowTheError(Message);
+			}
+        },
+		MaxDistanceRequired: function ()
+		{
+			if (RequiredIf.MaxDistance.value == '')
+            {
+                var Message = 'Miles From Zip Code is required if Zip Code is filled in.';
+                RequiredIf.ShowTheError(Message);
+            }
+        },
+		ShowTheError: function (Message)
+		{
+		    RequiredIf.Error.innerHTML = Message;
+		    RequiredIf.Error.style.display = 'block';
+		    RequiredIf.Valid = false;
+		}
+    };
+
+	RequiredIf.init();
+</script>
+
+<table id="Sortable" class="sortable">
+	<thead>
+		<th id="Title">Title</th>
+		<th id="Price">Price</th>
+		<th id="Year">Year</th>
+		<th id="City">City</th>
+		<th id="State">State</th>
+		<th id="Posted">Posted</th>
+		<th id="Source">Source</th>
+	</thead>
+	<tbody id="SortBody">

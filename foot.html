@@ -1,0 +1,26 @@
+    </tbody>
+</table>
+
+<script>
+    var TSort_Data = ['Sortable', 'h', 'f', 'i', 's', 's', 'd', 's'];
+    setTimeout(function () {
+        var TD = document.getElementById('Posted');
+        var a = TD.getElementsByTagName('a')[0];
+        simulateClick(a);
+        simulateClick(a);
+        }, 1000);
+
+    var simulateClick = function (elem) {
+        // Create our event (with options)
+        var evt = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+        });
+        // If cancelled, don't dispatch our event
+        var canceled = !elem.dispatchEvent(evt);
+    };
+</script>
+</body>
+
+</html>
