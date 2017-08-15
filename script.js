@@ -35,7 +35,7 @@ const server = http.createServer((req, res) => {
     // HTML += Head.toString();
 
 
-    // visit https://www.npmjs.com/package/node-craigslist for documentation related to this node module 
+    // visit https://www.npmjs.com/package/node-craigslist for documentation related to this node module
     // and how it interacts with craigslist
 
     // Get the search params
@@ -75,7 +75,7 @@ const server = http.createServer((req, res) => {
     var EBListings = ebay.xmlRequest({
             serviceName: 'Finding',
             opType: 'findItemsAdvanced',
-            appId: 'CarlosUv-CarSearc-SBX-9b7eb28a6-1eb02a64',      // FILL IN YOUR OWN APP KEY, GET ONE HERE: https://publisher.ebaypartnernetwork.com/PublisherToolsAPI
+            appId: 'AustinFr-carSearc-PRD-c91ebc5cc-a8e4f8a0',      // FILL IN YOUR OWN APP KEY, GET ONE HERE: https://publisher.ebaypartnernetwork.com/PublisherToolsAPI
             params: EBParams,
             reqOptions: { siteId: 100 },
             sandbox: true,
