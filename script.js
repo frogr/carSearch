@@ -75,7 +75,7 @@ const server = http.createServer((req, res) => {
     var EBListings = ebay.xmlRequest({
             serviceName: 'Finding',
             opType: 'findItemsAdvanced',
-            appId: 'AustinFr-carSearc-SBX-a91ebc5cc-b61d8647',      // FILL IN YOUR OWN APP KEY, GET ONE HERE: https://publisher.ebaypartnernetwork.com/PublisherToolsAPI
+            appId: 'AustinFr-carSearc-PRD-c91ebc5cc-a8e4f8a0',      // FILL IN YOUR OWN APP KEY, GET ONE HERE: https://publisher.ebaypartnernetwork.com/PublisherToolsAPI
             params: EBParams,
             reqOptions: { siteId: 100 },
             // sandbox: true,
