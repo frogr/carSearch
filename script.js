@@ -78,7 +78,7 @@ const server = http.createServer((req, res) => {
             appId: 'AustinFr-carSearc-SBX-a91ebc5cc-b61d8647',      // FILL IN YOUR OWN APP KEY, GET ONE HERE: https://publisher.ebaypartnernetwork.com/PublisherToolsAPI
             params: EBParams,
             reqOptions: { siteId: 100 },
-            sandbox: true,
+            // sandbox: true,
             parser: ebay.parseResponseJson    // (default)
         },
         // gets all the items together in a merged array
