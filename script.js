@@ -86,7 +86,11 @@ const server = http.createServer((req, res) => {
                 var State = Loc.length > 2 ? Loc[1] : '';
                 EBListingsHTML += '<tr>';
                 EBListingsHTML += '<td><a href="'+Item.viewItemURL+'">'+Title+'</a></td>';
-                EBListingsHTML += '<td>'+Item.sellingStatus.currentPrice.amount+'</td>';
+                if (Item.sellingStatus.currentPrice.amount > 0) {
+                    EBListingsHTML += '<td> $'+Item.sellingStatus.currentPrice.amount+'</td>';
+                } else {
+                    EBListingsHTML += '<td>'+Item.sellingStatus.currentPrice.amount+'</td>';
+                }
                 EBListingsHTML += '<td>'+Year+'</td>';
                 EBListingsHTML += '<td>'+City+'</td>';
                 EBListingsHTML += '<td>'+State+'</td>';
@@ -130,7 +134,11 @@ const server = http.createServer((req, res) => {
             var ListingURL = aListingURL.pop();
             HTML += '<tr>';
             HTML += '<td><a href="//' + ListingURL + '">' + Title + '</a></td>';
-            HTML += '<td>' + Listing.price.replace('$', '') + '</td>';
+            if (Listing.price.replace('$', '') > 0) {
+                HTML += '<td> $' + Listing.price.replace('$', '') + '</td>';
+            } else {
+                HTML += '<td>' + Listing.price.replace('$', '') + '</td>';
+            }
             HTML += '<td>'+Year+'</td>';
             HTML += '<td>'+Listing.location.replace('(', '').replace(')', '')+'</td>';
             HTML += '<td></td>';
@@ -146,10 +154,10 @@ const server = http.createServer((req, res) => {
 // local webserver then heroku, comment one out when you want to use the other
 
 // server running at 127.0.0.1:3000
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});
-// server.listen(process.env.PORT);
+// server.listen(port, hostname, () => {
+//     console.log(`Server running at http://${hostname}:${port}/`);
+// });
+server.listen(process.env.PORT);
 
 function LoadThePage (res)
 {
