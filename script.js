@@ -7,8 +7,7 @@ const ebay = require('ebay-api/index.js');
 const hostname = '127.0.0.1';
 const port = 4000;
 
-// run this page and get the file served in Node with `node script.js`
-
+// this is the entry point: serve in Node with `node script.js`
 const server = http.createServer((req, res) => {
 
         console.log('URL: '+req.url.substr(1));
@@ -28,17 +27,7 @@ const server = http.createServer((req, res) => {
 
     var PageLoader = new LoadThePage(res);
 
-    // var HTML = '';//'<div>'+GETParams+'</div>';
-
-    // Read the requested file content from file system
-    // var Head = fs.readFileSync('head.html');
-    // HTML += Head.toString();
-
-
-    // visit https://www.npmjs.com/package/node-craigslist for documentation related to this node module
-    // and how it interacts with craigslist
-
-    // Get the search params
+    // get the search params
     var url_parts = url.parse(req.url,true);
     console.log(url_parts.query);
     var GETParams = url_parts.query;
@@ -55,12 +44,6 @@ const server = http.createServer((req, res) => {
     console.log('CLKeyWord: '+CLKeyWord);
     var CLOptions = { city: City, category: 'cto' };
 
-
-
-
-
-
-
     var EBParams = { categorySiteId : 6001, categoryId : 6001 };
     var EBKeyWord = KeyWord;
     if (EBKeyWord.length) { EBParams.keywords = EBKeyWord; }
@@ -75,10 +58,9 @@ const server = http.createServer((req, res) => {
     var EBListings = ebay.xmlRequest({
             serviceName: 'Finding',
             opType: 'findItemsAdvanced',
-            appId: 'AustinFr-carSearc-PRD-c91ebc5cc-a8e4f8a0',      // FILL IN YOUR OWN APP KEY, GET ONE HERE: https://publisher.ebaypartnernetwork.com/PublisherToolsAPI
+            appId: 'AustinFr-carSearc-PRD-c91ebc5cc-a8e4f8a0',
             params: EBParams,
             reqOptions: { siteId: 100 },
-            // sandbox: true,
             parser: ebay.parseResponseJson    // (default)
         },
         // gets all the items together in a merged array
@@ -93,7 +75,6 @@ const server = http.createServer((req, res) => {
             var items = itemsResponse.searchResult.item;
 
             // console.log('Found', items.length, 'items');
-
             for (var i = 0; i < items.length; i++) {
                 var Item = items[i];
                 var Title = Item.title;
@@ -103,8 +84,6 @@ const server = http.createServer((req, res) => {
                 var Loc = Item.location.split(',');
                 var City = Loc.length > 2 ? Loc[0] : '';
                 var State = Loc.length > 2 ? Loc[1] : '';
-                //console.log('=======================');
-                //console.log(Item);
                 EBListingsHTML += '<tr>';
                 EBListingsHTML += '<td><a href="'+Item.viewItemURL+'">'+Title+'</a></td>';
                 EBListingsHTML += '<td>'+Item.sellingStatus.currentPrice.amount+'</td>';
@@ -137,7 +116,7 @@ const server = http.createServer((req, res) => {
 
     Promise.all([CLListings, EBListings]).then(function (CLListings, EBListings) {
 
-        var HTML = '';//'<div>'+GETParams+'</div>';
+        var HTML = '';
 
         CLListings[0].forEach(function (Listing, k) {
             if (!k)
@@ -164,6 +143,8 @@ const server = http.createServer((req, res) => {
     });
 });
 
+// local webserver then heroku, comment one out when you want to use the other
+
 // server running at 127.0.0.1:3000
 // server.listen(port, hostname, () => {
 //     console.log(`Server running at http://${hostname}:${port}/`);
@@ -187,18 +168,18 @@ function LoadThePage (res)
     {
         var HTML = '';
 
-        // Read the requested file content from file system
+        // read the requested file content from file system
         var Head = fs.readFileSync('head.html');
         HTML += Head.toString();
 
-        // Insert the tr's
+        // insert the tr's
         HTML += SELF.Listings.join('');
 
-        // Read the requested file content from file system
+        // read the requested file content from file system
         var Foot = fs.readFileSync('foot.html');
         HTML += Foot.toString();
 
-        // Load the page
+        // load the page
         res.write(HTML);
         res.end('\n');
     };

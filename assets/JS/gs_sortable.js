@@ -27,7 +27,7 @@ function TSort_StoreDef () {
 
 function tsInitOnload ()
 {
-    //	If TSort_All is not initialized - do it now (simulate old behavior)
+    //	if TSort_All is not initialized - do it now (simulate old behavior)
     if	(TSort_All == null)
         tsRegister();
 
@@ -47,7 +47,7 @@ function tsInit()
         return;
     var table_id = TSort_Data[0];
     var table = document.getElementById(table_id);
-    // Find thead & tbody data
+    // find thead & tbody data
     var cols, i, node, len, tr;
     var thead = table.getElementsByTagName('thead')[0];
     var tbody = table.getElementsByTagName('tbody')[0];
@@ -128,9 +128,6 @@ function tsInit()
 
         if	((sorting != null)&&(sorting != ''))
         {
-//			node.tsort_col_id = i;
-//			node.tsort_table_id = table_id;
-//			node.onclick = tsDraw;
             node.innerHTML = "<a href='' onClick=\"tsDraw(" + i + ",'" +
                 table_id + "'); return false\">" + node.innerHTML +
                 '</a><b><span id="TS_' + i + '_' + table_id + '"></span></b>';
@@ -138,7 +135,7 @@ function tsInit()
         }
     }
 
-    // Parse body rows
+    // parse body rows
     var rows = tbody.getElementsByTagName('tr');
     if	(rows.length == 0)	return;
     var date = new Date ();
@@ -150,7 +147,7 @@ function tsInit()
         cn = row.className;
         if	((cn != null)&&(cn.match(/(^| )_nosort( |$)/)))
         {
-            // Save a reference to the TR element
+            // save a reference to the TR element
             var new_row = row.cloneNode(true);
             if	(attached[k + 1] == null)
                 attached[k + 1] = new Array (new_row);
@@ -164,7 +161,7 @@ function tsInit()
         var row_data = [];
         for (j = 0; j < len; j++)
         {
-            // Get cell text
+            // get cell text
             text = cols[j].innerHTML;
             var sorting = TSort_Store.sorting[j];
             if	(sorting != 's')
@@ -224,10 +221,10 @@ function tsInit()
             }
             row_data.push(text);
         }
-        //	Initialize the rest of the columns, that are not in <tr>
+        //	initialize the rest of the columns, that are not in <tr>
         for (; j < cols_len; j++)
         {
-            // Get cell text
+            // get cell text
             var sorting = TSort_Store.sorting[j];
             text = '';
             if	((sorting == 'h')||(sorting == 's'))
@@ -237,7 +234,7 @@ function tsInit()
             row_data.push(text);
         }
         TSort_Store.rows.push(row_data);
-        // Save a reference to the TR element
+        // save a reference to the TR element
         var new_row = row.cloneNode(true);
         k++;
         new_row.tsort_row_id = k;
@@ -338,7 +335,7 @@ function tsDraw(p_id, p_table)
     }
 
     var len = sort_keys.length;
-    //	This will either remove the column completely from the sort_keys
+    //	this will either remove the column completely from the sort_keys
     //	array (i = 0) or remove duplicate column number if present (i = 1).
     while (i < len)
     {
@@ -358,10 +355,10 @@ function tsDraw(p_id, p_table)
         TSort_Store.sort_state[i] = null;
     }
 
-    // Sort the rows
+    // sort the rows
     TSort_Store.row_clones.sort(tsSort);
 
-    // Save the currently selected order
+    // save the currently selected order
     var new_tbody = document.createElement('tbody');
     var row_clones = TSort_Store.row_clones;
     len = row_clones.length;
@@ -435,7 +432,7 @@ function tsDraw(p_id, p_table)
         }
     }
 
-    // Replace table body
+    // replace table body
     var table = document.getElementById(table_id);
     var tbody = table.getElementsByTagName('tbody')[0];
     table.removeChild(tbody);
@@ -458,7 +455,7 @@ function tsDraw(p_id, p_table)
 
     if	(TSort_Store.cookie)
     {
-        //	Store the contents of "sorting" array into a cookie for 30 days
+        //	store the contents of "sorting" array into a cookie for 30 days
         var date = new Date();
         date.setTime (date.getTime () + 2592000);
         document.cookie = TSort_Store.cookie + "=" +
@@ -563,6 +560,6 @@ else
 {
     if  ((window.onload_sort_table == null)&&(window.onload != null))
         window.onload_sort_table = window.onload;
-    // Assign new onload function
+    // assign new onload function
     window.onload = tsInitOnload;
 }
