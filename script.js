@@ -53,7 +53,7 @@ const server = http.createServer((req, res) => {
     if (typeof GETParams.min_auto_year != 'undefined' && GETParams.min_auto_year != '') { CLKeyWord += '&min_auto_year='+GETParams.min_auto_year; }
     if (typeof GETParams.max_auto_year != 'undefined' && GETParams.max_auto_year != '') { CLKeyWord += '&max_auto_year='+GETParams.max_auto_year; }
     console.log('CLKeyWord: '+CLKeyWord);
-    var CLOptions = { city: City, category: 'cta' };
+    var CLOptions = { city: City, category: 'cto' };
 
 
 
