@@ -7,7 +7,7 @@ const ebay = require('ebay-api/index.js');
 const hostname = '127.0.0.1';
 const port = 4000;
 
-// this is the entry point: serve in Node with `node script.js`
+// this is the entry point: serve in Node with `node script.js` 
 const server = http.createServer((req, res) => {
 
         console.log('URL: '+req.url.substr(1));

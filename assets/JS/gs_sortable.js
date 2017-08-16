@@ -8,7 +8,7 @@
 
 var TSort_Store;
 var TSort_All;
-
+ 
 function TSort_StoreDef () {
     this.sorting = [];
     this.nodes = [];

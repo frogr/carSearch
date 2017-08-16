@@ -11,3 +11,4 @@ If you'd like to download the code and run it on your own machine, check out the
 ## Thanks!
 
 I couldn't have created this alone, thanks to my developer friends for helping with guidance and assistance when I needed it, as well as the author of [node-craigslist](https://www.npmjs.com/package/node-craigslist) for his great tool and documentation, and the super easy-to-read-and-digest API docs from eBay.
+ 

@@ -12,6 +12,6 @@
     "test": "No test",
     "start": "node script.js"
   },
-  "author": "Los",
+  "author": "frog",
   "license": "ISC"
 }
