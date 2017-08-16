@@ -7,7 +7,7 @@ const ebay = require('ebay-api/index.js');
 const hostname = '127.0.0.1';
 const port = 4000;
 
-// this is the entry point: serve in Node with `node script.js` 
+// this is the entry point: serve in Node with `node script.js`
 const server = http.createServer((req, res) => {
 
         console.log('URL: '+req.url.substr(1));
@@ -146,10 +146,10 @@ const server = http.createServer((req, res) => {
 // local webserver then heroku, comment one out when you want to use the other
 
 // server running at 127.0.0.1:3000
-// server.listen(port, hostname, () => {
-//     console.log(`Server running at http://${hostname}:${port}/`);
-// });
-server.listen(process.env.PORT);
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+});
+// server.listen(process.env.PORT);
 
 function LoadThePage (res)
 {
